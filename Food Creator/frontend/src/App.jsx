@@ -1,17 +1,16 @@
 import { useState } from "react";
-import "./App.css";
+import Card from "./Card";
+import DishForm from "./DishForm";
 
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <div className="bg-white p-4 rounded-lg shadow-lg">
-        <input
-          type="text"
-          placeholder="Nazwa Dania"
-          className="input input-primary"
-        />
+    <div className="flex h-screen">
+      <div className="w-1/2 flex items-start justify-start">
+        <DishForm />
       </div>
-      <div></div>
+      <div className="w-1/2 h-full">
+        <Card />
+      </div>
     </div>
   );
 }
