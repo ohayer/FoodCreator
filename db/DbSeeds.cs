@@ -4,6 +4,9 @@ namespace Food_Creator;
 
 public class DbSeeds
 {
+    // TODO: podać tutaj faktyczne urle do zdjęć (najlepiej jakby wszytskie były w tym samym rozmiarze)
+    // dodatkowo pomyśłałbym nad logiką wagi składników
+    // ewentualnie możnaby założyć , że każdy składnik będzie podany w 100 gramach a na przykład 30 gramów to będzie wartość 0.3 w Quantity
     public List<Ingredient> Ingredients { get; set; } = new List<Ingredient>
     {
         new Ingredient { IngredientId = 1, Name = "Tomato", Price = 0.50f, Type = IngredientTypes.Vegetable, Url = "http://example.com/tomato" },
