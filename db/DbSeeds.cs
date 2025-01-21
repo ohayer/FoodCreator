@@ -12,18 +12,11 @@ public class DbSeeds
         new Ingredient { IngredientId = 4, Name = "Beef 100g", Price = 5f, Type = IngredientTypes.Meat, Url = "http://example.com/beef" },
         new Ingredient { IngredientId = 5, Name = "Bacon 30g", Price = 2.88f, Type = IngredientTypes.Meat, Url = "http://example.com/bacon" }
     };
-
-
-    public List<Food> Foods { get; set; } = new List<Food>
-    {
-        new Food { FoodId = 1, Name = "Pizza", Url = "http://example.com/pizza", Price = 9.99f },
-        new Food { FoodId = 2, Name = "Burger", Url = "http://example.com/burger", Price = 5.99f }
-    };
-
+    
     public List<Dish> Dishes { get; set; } = new List<Dish>
     {
-        new Dish { DishId = 1, FoodId = 1 },
-        new Dish { DishId = 2, FoodId = 2 }
+        new Dish { DishId = 1, Name = "Pizza", Url = "http://example.com/pizza", Price = 9.99f },
+        new Dish { DishId = 2, Name = "Burger", Url = "http://example.com/burger", Price = 5.99f }
     };
 
     public List<DishIngredient> DishIngredients { get; set; } = new List<DishIngredient>

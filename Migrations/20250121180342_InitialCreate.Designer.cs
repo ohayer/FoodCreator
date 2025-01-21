@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Food_Creator.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241014124534_Initial")]
-    partial class Initial
+    [Migration("20250121180342_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,12 +33,18 @@ namespace Food_Creator.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DishId"));
 
-                    b.Property<int>("FoodId")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DishId");
-
-                    b.HasIndex("FoodId");
 
                     b.ToTable("Dishes");
 
@@ -46,12 +52,16 @@ namespace Food_Creator.Migrations
                         new
                         {
                             DishId = 1,
-                            FoodId = 1
+                            Name = "Pizza",
+                            Price = 9.99f,
+                            Url = "http://example.com/pizza"
                         },
                         new
                         {
                             DishId = 2,
-                            FoodId = 2
+                            Name = "Burger",
+                            Price = 5.99f,
+                            Url = "http://example.com/burger"
                         });
                 });
 
@@ -111,46 +121,6 @@ namespace Food_Creator.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Food_Creator.Model.Food", b =>
-                {
-                    b.Property<int>("FoodId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FoodId"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("FoodId");
-
-                    b.ToTable("Foods");
-
-                    b.HasData(
-                        new
-                        {
-                            FoodId = 1,
-                            Name = "Pizza",
-                            Price = 9.99f,
-                            Url = "http://example.com/pizza"
-                        },
-                        new
-                        {
-                            FoodId = 2,
-                            Name = "Burger",
-                            Price = 5.99f,
-                            Url = "http://example.com/burger"
-                        });
-                });
-
             modelBuilder.Entity("Food_Creator.Model.Ingredient", b =>
                 {
                     b.Property<int>("IngredientId")
@@ -159,7 +129,7 @@ namespace Food_Creator.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IngredientId"));
 
-                    b.Property<int?>("FoodId")
+                    b.Property<int?>("DishId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -178,7 +148,7 @@ namespace Food_Creator.Migrations
 
                     b.HasKey("IngredientId");
 
-                    b.HasIndex("FoodId");
+                    b.HasIndex("DishId");
 
                     b.ToTable("Ingredients");
 
@@ -225,21 +195,10 @@ namespace Food_Creator.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Food_Creator.Model.Dish", b =>
-                {
-                    b.HasOne("Food_Creator.Model.Food", "Food")
-                        .WithMany()
-                        .HasForeignKey("FoodId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Food");
-                });
-
             modelBuilder.Entity("Food_Creator.Model.DishIngredient", b =>
                 {
                     b.HasOne("Food_Creator.Model.Dish", "Dish")
-                        .WithMany("DishIngredients")
+                        .WithMany()
                         .HasForeignKey("DishId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -257,17 +216,12 @@ namespace Food_Creator.Migrations
 
             modelBuilder.Entity("Food_Creator.Model.Ingredient", b =>
                 {
-                    b.HasOne("Food_Creator.Model.Food", null)
+                    b.HasOne("Food_Creator.Model.Dish", null)
                         .WithMany("Ingredients")
-                        .HasForeignKey("FoodId");
+                        .HasForeignKey("DishId");
                 });
 
             modelBuilder.Entity("Food_Creator.Model.Dish", b =>
-                {
-                    b.Navigation("DishIngredients");
-                });
-
-            modelBuilder.Entity("Food_Creator.Model.Food", b =>
                 {
                     b.Navigation("Ingredients");
                 });

@@ -12,7 +12,6 @@ namespace Food_Creator
 
         // DbSet reprezentujące tabele w bazie danych
         public DbSet<Dish> Dishes { get; set; }
-        public DbSet<Food> Foods { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<DishIngredient> DishIngredients { get; set; }
 
@@ -27,13 +26,11 @@ namespace Food_Creator
             var dbSeeds = new DbSeeds();
             modelBuilder.Entity<Ingredient>().HasData(
                 dbSeeds.Ingredients);
-            modelBuilder.Entity<Food>().HasData(
-                dbSeeds.Foods);
             modelBuilder.Entity<Dish>().HasData(
                 dbSeeds.Dishes);
             modelBuilder.Entity<DishIngredient>().HasData(
                 dbSeeds.DishIngredients);
-            // Dodatkowe konfiguracje mogą iść tutaj (relacje, ograniczenia itp.)
+            // Dodatkowe konfiguracje mogą iść tutaj
         }
     }
 }
