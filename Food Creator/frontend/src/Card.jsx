@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const cardExamples = [
   {
@@ -38,19 +38,29 @@ const cardExamples = [
   },
 ];
 
-const Card = ({ onIngredientAdd }) => {
+const Card = ({ onIngredientAdd, removedIngredientFromForm }) => {
   const [ingredients, setIngredients] = useState(cardExamples);
+
+  useEffect(() => {
+    if (removedIngredientFromForm) {
+      setIngredients((prev) => [...prev, removedIngredientFromForm]);
+    }
+  }, [removedIngredientFromForm]);
 
   const onAddIngredient = ({ ingredient }) => {
     setIngredients(ingredients.filter((i) => i.id !== ingredient.id));
     onIngredientAdd(ingredient);
   };
+
   return (
     <div className="pt-8">
       <h4 className="text-4xl">Dostępne składniki</h4>
-      <div className="grid grid-cols-2 gap-4 p-12">
+      <div className="grid grid-cols-2 gap-4 p-3  max-h-208  overflow-y-auto">
         {ingredients.map((ingredient) => (
-          <div className="card bg-gray-700 w-96 shadow-sm" key={ingredient.id}>
+          <div
+            className="card bg-gray-700 w-96 shadow-sm scale-85"
+            key={ingredient.id}
+          >
             <figure>
               <img src={ingredient.url} alt="Shoes" />
             </figure>
