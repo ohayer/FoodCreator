@@ -1,14 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "OD10FAst21ICg1Wdl5RSGfZp/Oah31vDgCzFLlnpLAUOU6DNfqifloGGCCFyl0y49Z0cIk5h3L7HZqXz7DHzQA==",
   "success": true,
   "projectFilePath": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator.csproj",
-=======
-  "dgSpecHash": "COmxdh5DcBShvX//H2f9IkQYAuFoXCBKJ0EUUmlhNOQCzf1jnEcLQNb6SYzHjYXm/qV2RGNtK0B589Swb+HYrg==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator\\Food Creator.csproj",
->>>>>>> magda
   "expectedPackageFiles": [
     "C:\\Users\\okurkowski\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\okurkowski\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
@@ -94,5 +88,12 @@
     "C:\\Users\\okurkowski\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\okurkowski\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

@@ -4494,19 +4494,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator.csproj",
       "projectName": "Food Creator",
       "projectPath": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator.csproj",
       "packagesPath": "C:\\Users\\okurkowski\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator\\Food Creator.csproj",
-      "projectName": "Food Creator",
-      "projectPath": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator\\Food Creator.csproj",
-      "packagesPath": "C:\\Users\\okurkowski\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator\\obj\\",
->>>>>>> magda
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\okurkowski\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -4578,5 +4570,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
