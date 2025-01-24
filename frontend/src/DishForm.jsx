@@ -41,7 +41,7 @@ const DishForm = () => {
       <div className="w-1/2 items-start justify-start">
         <h4 className="text-6xl mb-14 pt-16 pl-16">Stwórz własne danie:</h4>
         <div className="flex">
-          <DishFormInputs />
+          <DishFormInputs formIngredients={formIngredients} />
           <div className="flex flex-col w-1/2">
             <h4 className="pl-4 text-2xl mb-6">Składniki</h4>
             <DishFormIngredients

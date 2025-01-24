@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "COmxdh5DcBShvX//H2f9IkQYAuFoXCBKJ0EUUmlhNOQCzf1jnEcLQNb6SYzHjYXm/qV2RGNtK0B589Swb+HYrg==",
+  "dgSpecHash": "OD10FAst21ICg1Wdl5RSGfZp/Oah31vDgCzFLlnpLAUOU6DNfqifloGGCCFyl0y49Z0cIk5h3L7HZqXz7DHzQA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator\\Food Creator.csproj",
+  "projectFilePath": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\okurkowski\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\okurkowski\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

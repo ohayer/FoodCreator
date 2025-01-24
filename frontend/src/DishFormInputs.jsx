@@ -23,7 +23,7 @@ const formInputs = [
   },
 ];
 
-const DishFormInputs = () => {
+const DishFormInputs = ({ formIngredients }) => {
   const [dish, setDish] = useState({
     name: "",
     url: "",
@@ -48,20 +48,20 @@ const DishFormInputs = () => {
   };
 
   const handleSubmit = async () => {
-    if (!validateForm()) return; // Jeśli są błędy, zatrzymaj wysyłanie
-
-    try {
-      const response = await axios.put("http://localhost:8080", dish, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log("Danie zostało zapisane:", response.data);
-      alert("Danie zostało pomyślnie zapisane!");
-    } catch (error) {
-      console.error("Błąd podczas zapisywania dania:", error);
-      alert("Wystąpił problem podczas zapisywania dania.");
-    }
+    // if (!validateForm()) return; // Jeśli są błędy, zatrzymaj wysyłanie
+    console.log(formIngredients);
+    // try {
+    //   const response = await axios.put("http://localhost:8080", dish, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+    //   console.log("Danie zostało zapisane:", response.data);
+    //   alert("Danie zostało pomyślnie zapisane!");
+    // } catch (error) {
+    //   console.error("Błąd podczas zapisywania dania:", error);
+    //   alert("Wystąpił problem podczas zapisywania dania.");
+    // }
   };
 
   return (
