@@ -8,21 +8,24 @@ const DishForm = () => {
   const [removedIngredient, setRemovedIngredient] = useState(null);
 
   const removeIngredientFromForm = (ingredient) => {
-    console.log(ingredient);
     setRemovedIngredient(null);
-    setFormIngredients((prev) => prev.filter((i) => i.id !== ingredient.id));
+    setFormIngredients((prev) =>
+      prev.filter((i) => i.IngredientId !== ingredient.IngredientId)
+    );
     setRemovedIngredient(ingredient);
   };
 
   const handleIngredientAdd = (ingredient) => {
-    ingredient.quantity = 1;
+    ingredient.Quantity = 1;
     setFormIngredients([...formIngredients, ingredient]);
   };
 
   const increaseIngredientQuantity = (ingredient) => {
     setFormIngredients((prevIngredients) =>
       prevIngredients.map((i) =>
-        i.id === ingredient.id ? { ...i, quantity: i.quantity + 1 } : i
+        i.IngredientId === ingredient.IngredientId
+          ? { ...i, Quantity: i.Quantity + 1 }
+          : i
       )
     );
   };
@@ -30,8 +33,8 @@ const DishForm = () => {
   const decreaseIngredientQuantity = (ingredient) => {
     setFormIngredients((prevIngredients) =>
       prevIngredients.map((i) =>
-        i.id === ingredient.id && i.quantity > 0
-          ? { ...i, quantity: i.quantity - 1 }
+        i.IngridientId === ingredient.IngridientId && i.Quantity > 0
+          ? { ...i, Quantity: i.Quantity - 1 }
           : i
       )
     );

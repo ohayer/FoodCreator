@@ -4,11 +4,11 @@ const DishFormIngredients = ({ formIngredients, actions }) => {
       {formIngredients.map((ingredient) => (
         <div
           className="grid grid-cols-3 gap-4 bg-gray-900 p-4 m-4 rounded-lg"
-          key={ingredient.id}
+          key={ingredient.IngredientId}
         >
           <div className="flex flex-col">
-            <p>{ingredient.name}</p>
-            <p>{ingredient.price}zł/szt</p>
+            <p>{ingredient.Name}</p>
+            <p>{ingredient.Price}zł/szt</p>
           </div>
           <div className="flex items-center space-x-2 text-sm">
             <button
@@ -19,7 +19,7 @@ const DishFormIngredients = ({ formIngredients, actions }) => {
             </button>
             <input
               type="text"
-              value={ingredient.quantity}
+              value={ingredient.Quantity}
               readOnly
               className="w-12 text-center border border-gray-300 rounded"
             />
