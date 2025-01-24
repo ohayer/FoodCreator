@@ -6,6 +6,5 @@ public class Ingredient
     public string Name { get; set; }
     public string Url { get; set; }
     public float Price { get; set; }
-    public IngredientTypes Type { get; set; }
-    public List<DishIngredient> DishIngredients { get; set; } = new();
+    public ICollection<DishIngredient> DishIngredients { get; set; }
 }

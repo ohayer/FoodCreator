@@ -10,8 +10,13 @@ var connectionString = builder.Configuration.GetConnectionString("Food");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+
 // Dodanie kontrolerów
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+    });
 
 var app = builder.Build();
 
@@ -34,6 +39,7 @@ using (var scope = app.Services.CreateScope())
         throw;
     }
 }
+
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
