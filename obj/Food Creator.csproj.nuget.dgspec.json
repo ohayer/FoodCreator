@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator.csproj": {}
   },
   "projects": {
@@ -12,6 +13,19 @@
         "projectPath": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator.csproj",
         "packagesPath": "C:\\Users\\okurkowski\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\obj\\",
+=======
+    "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator\\Food Creator.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator\\Food Creator.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator\\Food Creator.csproj",
+        "projectName": "Food Creator",
+        "projectPath": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator\\Food Creator.csproj",
+        "packagesPath": "C:\\Users\\okurkowski\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\okurkowski\\RiderProjects\\Food Creator\\Food Creator\\obj\\",
+>>>>>>> magda
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\okurkowski\\AppData\\Roaming\\NuGet\\NuGet.Config"
