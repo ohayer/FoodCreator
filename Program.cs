@@ -12,6 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Dodanie kontrolerów
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer():
 
 var app = builder.Build();
 
