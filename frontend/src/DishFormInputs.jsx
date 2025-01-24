@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import postDish from "./api/postDish";
 import UrlInput from "./UrlInput";
 
 const formInputs = [
@@ -11,8 +11,8 @@ const formInputs = [
   },
   {
     label: "Zdjęcie (url)",
-    type: "url",
-    className: "url-input",
+    type: "text",
+    className: "input input-warning",
     key: "url",
   },
   {
@@ -49,19 +49,18 @@ const DishFormInputs = ({ formIngredients }) => {
 
   const handleSubmit = async () => {
     // if (!validateForm()) return; // Jeśli są błędy, zatrzymaj wysyłanie
-    console.log(formIngredients);
-    // try {
-    //   const response = await axios.put("http://localhost:8080", dish, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    //   console.log("Danie zostało zapisane:", response.data);
-    //   alert("Danie zostało pomyślnie zapisane!");
-    // } catch (error) {
-    //   console.error("Błąd podczas zapisywania dania:", error);
-    //   alert("Wystąpił problem podczas zapisywania dania.");
-    // }
+    const dishToSent = {
+      Name: dish.name,
+      Url: dish.url,
+      Price: dish.price,
+      DishIngredients: [
+        ...formIngredients.map((ingredient) => ({
+          IngredientId: ingredient.IngredientId,
+          Quantity: ingredient.Quantity,
+        })),
+      ],
+    };
+    postDish(dishToSent);
   };
 
   return (
