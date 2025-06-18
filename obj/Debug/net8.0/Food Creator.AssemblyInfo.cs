@@ -13,7 +13,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Food Creator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< Updated upstream
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c1f4dcf53f6a5a35c1a9379ab860bdf6daac230")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43a7ddf5e9d0f5191e0f3fb2075dbde49982001a")]
+>>>>>>> Stashed changes
 [assembly: System.Reflection.AssemblyProductAttribute("Food Creator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Food Creator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
