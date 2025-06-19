@@ -33,7 +33,6 @@ public class DishesController : ControllerBase
             {
                 IngredientName = di.Ingredient.Name,
                 Quantity = di.Quantity,
-                IngredientUrl = di.Ingredient.Url,
                 IngredientPrice = di.Ingredient.Price
             })
         });
@@ -61,7 +60,6 @@ public async Task<ActionResult<Dish>> CreateDish([FromBody] DishDto newDishDto)
         var dish = new Dish
         {
             Name = newDishDto.Name,
-            Url = newDishDto.Url,
             Price = newDishDto.Price
         };
 

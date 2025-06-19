@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import postIngredient from "./api/postIngredient";
+import "./index.css"
 
 const formInputs = [
     {
@@ -9,24 +10,25 @@ const formInputs = [
         key: "name",
     },
     {
-        label: "URL",
-        type: "text",
-        className: "input input-primary",
-        key: "url",
-    },
-    {
         label: "Cena (zł)",
         type: "number",
         className: "input input-secondary",
         key: "price",
     },
+    {
+        label: "Zdjęcie",
+        type: "file",
+        accept: "image/*",
+        className: "input input-primary",
+        key: "image",
+    }
 ];
 
 const IngredientFormInputs = ({ formIngredients }) => {
     const [ingredient, setIngredient] = useState({
         name: "",
-        url: "",
         price: "",
+        image: null,
     });
     const [errors, setErrors] = useState({});
 
@@ -37,9 +39,8 @@ const IngredientFormInputs = ({ formIngredients }) => {
 
     const validateForm = () => {
         const newErrors = {};
-        if (!dish.name.trim()) newErrors.name = "Nazwa nie może być pusta.";
-        if (!dish.url.trim()) newErrors.url = "URL nie może być pusty.";
-        if (!dish.price || isNaN(dish.price) || parseFloat(dish.price) <= 0) {
+        if (!ingredient.name.trim()) newErrors.name = "Nazwa nie może być pusta.";
+        if (!ingredient.price || isNaN(ingredient.price) || parseFloat(ingredient.price) <= 0) {
             newErrors.price = "Cena musi być liczbą większą od zera.";
         }
         setErrors(newErrors);
@@ -52,38 +53,41 @@ const IngredientFormInputs = ({ formIngredients }) => {
 
     const handleSubmit = async () => {
         // if (!validateForm()) return; // Jeśli są błędy, zatrzymaj wysyłanie
-        const ingredientToSent = {
-            Name: ingredient.name,
-            Url: ingredient.url,
-            Price: ingredient.price,
-        };
+        const formData = new FormData();
+        console.log("Ingredient before sending:", ingredient);
+        formData.append("Name", ingredient.name);
+        formData.append("Price", ingredient.price);
+        if (ingredient.image) {
+            formData.append("Image", ingredient.image);
+        }
         try {
-            await postIngredient(ingredientToSent);
+            await postIngredient(formData);
             alert("✅ Składnik został utworzony!");
-            setIngredient({ name: "", url: "", price: "" });
+            setIngredient({ name: "", price: "" , image: null});
         } catch {
-            alert("❌ Błąd przy tworzeniu składników.");
+            alert("❌ Błąd przy tworzeniu dania.");
         }
     };
 
     return (
-        <div className="inputs pt-8 w-1/2 pl-12">
+        <div className="inputs pt-8 pl-12">
             {formInputs.map((input, index) => (
-                <div className="flex flex-col mb-6" key={index}>
+                <div className="flex flex-col mb-6" key={index} >
                     <label className="text-lg font-medium mb-2">{input.label}</label>
-                        <input
-                            type={input.type}
-                            placeholder={input.label}
-                            className={`${input.className} ${
-                                errors[input.key] ? "border-red-500" : ""
-                            }`}
-                            value={ingredient[input.key]}
-                            onChange={(e) => handleInputChange(input.key, e.target.value)}
-                        />
+                    <input
+                        type={input.type}
+                        accept={input.accept}
+                        placeholder={input.label}
+                        className={`${input.className} ${errors[input.key] ? "border-red-500" : ""}`}
+                        value={input.type === "file" ? undefined : ingredient[input.key]}
+                        onChange={(e) => {
+                            const value=
+                                input.type === "file" ? e.target.files[0] : e.target.value;
+                            handleInputChange(input.key, value);
+                        }}
+                    />
                     {errors[input.key] && (
-                        <span className="text-red-500 text-sm mt-1">
-              {errors[input.key]}
-            </span>
+                        <span className="text-red-500 text-sm mt-1"></span>
                     )}
                 </div>
             ))}

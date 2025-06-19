@@ -1,15 +1,12 @@
-export default async function postIngredient(ingredientData) {
+export default async function postIngredient(formData) {
     const response = await fetch("http://localhost:3000/api/Ingredients", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(ingredientData)
+        body: formData,
     });
 
     if (!response.ok) {
         throw new Error("Błąd podczas dodawania składników");
     }
 
-    return response.json();
+    return await response.json();
 }

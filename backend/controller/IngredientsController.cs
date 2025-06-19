@@ -18,13 +18,29 @@ namespace Food_Creator.controller
 
         // GET: api/Ingredients
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Ingredient>>> GetIngredients()
+        public async Task<ActionResult<IEnumerable<IngredientDto>>> GetIngredients()
         {
             // Zwraca wszystkie ingredients z bazy danych
             var ingredients = await _context.Ingredients.ToListAsync();
-            return Ok(ingredients);
+            var result = ingredients.Select(i => new IngredientDto {
+                IngredientID = i.IngredientId,
+                Name = i.Name,
+                Price = i.Price,
+                Url = $"http://localhost:3000/api/ingredients/{i.IngredientId}/image",
+            }).ToList();
+            return Ok(result);
         }
-
+        
+        [HttpGet("{id}/image")]
+        public async Task<IActionResult> GetImage(int id)
+        {
+            var ingredient = await _context.Ingredients.FindAsync(id);
+            if (ingredient == null || ingredient.Image == null)
+                return NotFound();
+            
+            return File(ingredient.Image, "image/jpeg");
+        }
+        
         [HttpDelete]
         public async Task<ActionResult<Ingredient>> DeleteIngredient([FromQuery] string name)
         {
@@ -62,7 +78,6 @@ namespace Food_Creator.controller
             }
 
             ingredientToUpdate.Name = updateIngredient.Name;
-            ingredientToUpdate.Url = updateIngredient.Url;
             ingredientToUpdate.Price = updateIngredient.Price;
 
             await _context.SaveChangesAsync();
@@ -71,7 +86,7 @@ namespace Food_Creator.controller
         }
         
         [HttpPost]
-        public async Task<ActionResult<Ingredient>> CreateIngredient([FromBody] Ingredient newIngredient)
+        public async Task<ActionResult<Ingredient>> CreateIngredient([FromForm] IngredientDto newIngredient)
         {
             if (newIngredient == null || string.IsNullOrWhiteSpace(newIngredient.Name))
             {
@@ -80,11 +95,19 @@ namespace Food_Creator.controller
 
             try
             {
+                byte[]? imageBytes = null;
+                if (newIngredient.Image != null)
+                {
+                 using var memoryStream = new MemoryStream();
+                 await newIngredient.Image.CopyToAsync(memoryStream);
+                 imageBytes = memoryStream.ToArray();
+                }
+                
                 var ingredient = new Ingredient
                 {
                     Name = newIngredient.Name,
-                    Url = newIngredient.Url,
-                    Price = newIngredient.Price
+                    Price = newIngredient.Price,
+                    Image = imageBytes,
                 };
 
 
