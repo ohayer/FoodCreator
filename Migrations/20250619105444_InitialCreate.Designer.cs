@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Food_Creator.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250124120036_initial")]
-    partial class initial
+    [Migration("20250619105444_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -190,7 +190,7 @@ namespace Food_Creator.Migrations
                         .IsRequired();
 
                     b.HasOne("Food_Creator.Model.Ingredient", "Ingredient")
-                        .WithMany("DishIngredients")
+                        .WithMany()
                         .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -201,11 +201,6 @@ namespace Food_Creator.Migrations
                 });
 
             modelBuilder.Entity("Food_Creator.Model.Dish", b =>
-                {
-                    b.Navigation("DishIngredients");
-                });
-
-            modelBuilder.Entity("Food_Creator.Model.Ingredient", b =>
                 {
                     b.Navigation("DishIngredients");
                 });

@@ -1,4 +1,5 @@
 using Food_Creator.Model;
+using Food_Creator.Model.dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,14 +42,15 @@ public class DishesController : ControllerBase
     }
     // POST: api/Dishes
 [HttpPost]
-public async Task<ActionResult<Dish>> CreateDish([FromBody] Dish newDish)
+[HttpPost]
+public async Task<ActionResult<Dish>> CreateDish([FromBody] DishDto newDishDto)
 {
-    if (newDish == null)
+    if (newDishDto == null)
     {
         return BadRequest("Dish object cannot be null.");
     }
 
-    if (string.IsNullOrWhiteSpace(newDish.Name))
+    if (string.IsNullOrWhiteSpace(newDishDto.Name))
     {
         return BadRequest("Dish name is required.");
     }
@@ -58,44 +60,39 @@ public async Task<ActionResult<Dish>> CreateDish([FromBody] Dish newDish)
         // Utwórz nowe danie
         var dish = new Dish
         {
-            Name = newDish.Name,
-            Url = newDish.Url,
-            Price = newDish.Price
+            Name = newDishDto.Name,
+            Url = newDishDto.Url,
+            Price = newDishDto.Price
         };
 
-        // Jeśli są składniki, obsłuż ich dodanie
-        if (newDish.DishIngredients != null && newDish.DishIngredients.Any())
+        // Obsłuż składniki
+        if (newDishDto.DishIngredients != null && newDishDto.DishIngredients.Any())
         {
-            foreach (var dishIngredient in newDish.DishIngredients)
+            foreach (var dishIngredientDto in newDishDto.DishIngredients)
             {
                 var existingIngredient = await _context.Ingredients
-                    .FirstOrDefaultAsync(i => i.Name == dishIngredient.Ingredient.Name);
+                    .FirstOrDefaultAsync(i => i.IngredientId == dishIngredientDto.IngredientId);
 
                 if (existingIngredient == null)
                 {
-                    // Dodanie nowego składnika do bazy danych
-                    _context.Ingredients.Add(dishIngredient.Ingredient);
-                    await _context.SaveChangesAsync();
-                    existingIngredient = dishIngredient.Ingredient;
+                    throw new Exception($"Ingredient with ID {dishIngredientDto.IngredientId} does not exist.");
                 }
 
-                // Utworzenie relacji DishIngredient
                 var newDishIngredient = new DishIngredient
                 {
                     Dish = dish,
                     Ingredient = existingIngredient,
-                    Quantity = dishIngredient.Quantity
+                    Quantity = dishIngredientDto.Quantity
                 };
 
                 _context.DishIngredients.Add(newDishIngredient);
             }
         }
 
-        // Dodanie dania do bazy danych
+        // Dodaj danie do bazy
         _context.Dishes.Add(dish);
         await _context.SaveChangesAsync();
 
-        // Zwrócenie odpowiedzi 201 Created
         return CreatedAtAction(nameof(GetDishes), new { id = dish.DishId }, dish);
     }
     catch (Exception ex)
@@ -104,6 +101,5 @@ public async Task<ActionResult<Dish>> CreateDish([FromBody] Dish newDish)
         return StatusCode(500, "An error occurred while creating the dish.");
     }
 }
+
 }
-    // TODO: Stworzyć metodę POST do tworzenia nowego dania
-    // metoda ma zwracać poprawne kody wraz z prostym logowaniem wiadomości o błedach

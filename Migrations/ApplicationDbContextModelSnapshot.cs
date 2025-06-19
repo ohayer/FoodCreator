@@ -187,7 +187,7 @@ namespace Food_Creator.Migrations
                         .IsRequired();
 
                     b.HasOne("Food_Creator.Model.Ingredient", "Ingredient")
-                        .WithMany("DishIngredients")
+                        .WithMany()
                         .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -198,11 +198,6 @@ namespace Food_Creator.Migrations
                 });
 
             modelBuilder.Entity("Food_Creator.Model.Dish", b =>
-                {
-                    b.Navigation("DishIngredients");
-                });
-
-            modelBuilder.Entity("Food_Creator.Model.Ingredient", b =>
                 {
                     b.Navigation("DishIngredients");
                 });
