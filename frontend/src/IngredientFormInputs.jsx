@@ -62,7 +62,7 @@ const IngredientFormInputs = ({ formIngredients }) => {
             alert("✅ Składnik został utworzony!");
             setIngredient({ name: "", url: "", price: "" });
         } catch {
-            alert("❌ Błąd przy tworzeniu dania.");
+            alert("❌ Błąd przy tworzeniu składników.");
         }
     };
 

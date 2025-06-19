@@ -1,0 +1,15 @@
+version: "3.10"
+
+services:
+  backend:
+    build: ./backend
+    container_name: ef-backend
+    ports:
+      - "3000:3000"
+  frontend:
+    build: ./frontend
+    container_name: react-frontend 
+    ports:
+      - "5000:5000"
+    depends_on:
+      - backend

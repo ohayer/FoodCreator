@@ -1,5 +1,5 @@
 export default async function postDish(dishData) {
-    const response = await fetch("https://localhost:44385/api/dishes", {
+    const response = await fetch("http://localhost:3000/api/dishes", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
