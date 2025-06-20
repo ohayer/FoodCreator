@@ -1,4 +1,4 @@
-﻿# Created by https://www.toptal.com/developers/gitignore/api/aspnetcore
+# Created by https://www.toptal.com/developers/gitignore/api/aspnetcore
 # Edit at https://www.toptal.com/developers/gitignore?templates=aspnetcore
 
 ### ASPNETCore ###
@@ -23,7 +23,7 @@ x64/
 x86/
 bld/
 [Bb]in/
-[Oo]bj/
+**/obj
 [Ll]og/
 
 # Visual Studio 2015 cache/options directory
@@ -261,10 +261,12 @@ paket-files/
 .idea/
 *.sln.iml
 
-obj/
-bin/
+**/bin
 # CodeRush
 .cr/
+
+frontend/.vite
+
 
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
