@@ -20,48 +20,12 @@ const Card = ({ onIngredientAdd, removedIngredientFromForm }) => {
 
   const onAddIngredient = ({ ingredient }) => {
     setIngredients(
-<<<<<<< HEAD
-      ingredients.filter((i) => i.IngredientId !== ingredient.IngredientId)
-=======
         ingredients.filter((i) => i.IngredientId !== ingredient.IngredientId)
->>>>>>> magda
     );
     onIngredientAdd(ingredient);
   };
 
   return (
-<<<<<<< HEAD
-    <div className="pt-8">
-      <h4 className="text-4xl">Dostępne składniki</h4>
-      <div className="grid grid-cols-2 gap-4 p-3  max-h-208  overflow-y-auto">
-        {ingredients.map((ingredient) => (
-          <div
-            className="card bg-gray-700 w-96 shadow-sm scale-85"
-            key={ingredient.IngredientId}
-          >
-            <figure>
-              <img src={ingredient.Url} alt="Shoes" />
-            </figure>
-            <div className="card-body w-full">
-              <h2 className="card-title">{ingredient.Name}</h2>
-              <p>Cena {ingredient.Price} zł</p>
-              <div className="card-actions justify-end">
-                <button
-                  className="btn btn-success"
-                  onClick={() => onAddIngredient({ ingredient })}
-                >
-                  Dodaj
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-export default Card;
-=======
       <div className="pt-8">
         <h4 className="text-4xl">Dostępne składniki</h4>
         <div className="grid grid-cols-2 gap-4 p-3  max-h-208  overflow-y-auto">
@@ -95,4 +59,3 @@ export default Card;
   );
 };
 export default Card;
->>>>>>> magda
