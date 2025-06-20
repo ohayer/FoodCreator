@@ -8,7 +8,7 @@ Prosty projekt demonstracyjny aplikacji typu frontend/backend. Backend napisany 
 - Możliwość dodawania dań oraz własnych składników wraz ze zdjęciami
 - Obsługa CRUD
 
-# 1. Uruchomienie:  
+## Uruchomienie:  
 `docker-compose up`
 
 Konteneryzacja pozwala na zintegrowanie backendu z frontendem w prosty i przejrzysty sposób, dzięki czemu wiele osób może pracować na kodzie aplikacji przy zachowaniu każdorazowo tej samej konfiguracji. Frontend będzie dostępny pod http://localhost:5000, backend pod http://localhost:3000
