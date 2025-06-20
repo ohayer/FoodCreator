@@ -12,8 +12,8 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-            <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+          <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
@@ -23,5 +23,13 @@
         </PackageReference>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
-
+    <ItemGroup>
+        <Compile          Remove="Tests\**\*" />
+        <None             Remove="Tests\**\*" />
+        <Content          Remove="Tests\**\*" />
+        <EmbeddedResource Remove="Tests\**\*" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="service\" />
+    </ItemGroup>
 </Project>
