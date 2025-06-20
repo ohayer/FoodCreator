@@ -60,10 +60,6 @@ public async Task<ActionResult<Dish>> CreateDish([FromBody] DishDto newDishDto)
         var dish = new Dish
         {
             Name = newDishDto.Name,
-<<<<<<< HEAD:controller/DishesController.cs
-            Url = newDishDto.Url,
-=======
->>>>>>> magda:backend/controller/DishesController.cs
             Price = newDishDto.Price
         };
 
@@ -104,8 +100,5 @@ public async Task<ActionResult<Dish>> CreateDish([FromBody] DishDto newDishDto)
     }
 }
 
-<<<<<<< HEAD:controller/DishesController.cs
 }
-=======
-}
->>>>>>> magda:backend/controller/DishesController.cs
+
