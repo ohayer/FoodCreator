@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Food_Creator.controller;
 using Food_Creator.Model;
 using FoodCreator.Tests.Shared;
@@ -10,15 +10,18 @@ using Xunit;
 /// </summary>
 public class Ingredients_DeleteTests
 {
-    [Fact]
-    public async Task DeleteIngredient_Existing_ReturnsOkAndRemoves()
+    [Theory(DisplayName = "Usunięcie istniejącego składnika zwraca 200 OK i usuwa go z bazy danych")]
+    [InlineData("Salt", 0.1f)]
+    [InlineData("Sugar", 0.3f)]
+    [InlineData("Pepper", 0.45f)]
+    public async Task DeleteIngredient_VariousExistingIngredients_ReturnsOkAndRemoves(string ingredientName, float price)
     {
         var ctx = TestDbContextFactory.Create();
-        ctx.Ingredients.Add(new Ingredient { Name = "Pepper", Price = 0.2f });
+        ctx.Ingredients.Add(new Ingredient { Name = ingredientName, Price = price });
         await ctx.SaveChangesAsync();
 
         var ctrl = new IngredientsController(ctx);
-        var res  = await ctrl.DeleteIngredient("Pepper");
+        var res  = await ctrl.DeleteIngredient(ingredientName);
 
         Assert.IsType<OkObjectResult>(res.Result);
         Assert.Empty(ctx.Ingredients);
@@ -27,7 +30,7 @@ public class Ingredients_DeleteTests
     /// <summary>
     /// Gdy składnik nie istnieje → 404.
     /// </summary>
-    [Fact]
+    [Fact(DisplayName = "Usunięcie nieistniejącego składnika zwraca 404 NotFound")]
     public async Task DeleteIngredient_NotExisting_ReturnsNotFound()
     {
         var ctx  = TestDbContextFactory.Create();
