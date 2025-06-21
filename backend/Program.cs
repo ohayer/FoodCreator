@@ -34,29 +34,28 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
-
-// Automatyczne czyszczenie i migracja bazy danych////nie
-// Migracja bazy danych przy starcie (bez kasowania danych!)
-using (var scope = app.Services.CreateScope())
+if (!app.Environment.IsEnvironment("Testing"))
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-    try
+// Automatyczne czyszczenie i migracja bazy danych dla środowiska nietestowego
+// Migracja bazy danych przy starcie (bez kasowania danych!)
+    using (var scope = app.Services.CreateScope())
     {
-        // Tylko stosuje migracje — NIE USUWA bazy!
-        dbContext.Database.Migrate();
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Błąd podczas migracji bazy danych: {ex.Message}");
-        throw;
-    }
-    
-    dbContext.Database.EnsureCreated();
+        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
+        try
+        {
+            // Tylko stosuje migracje — NIE USUWA bazy!
+            dbContext.Database.Migrate();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Błąd podczas migracji bazy danych: {ex.Message}");
+            throw;
+        }
+
+        dbContext.Database.EnsureCreated();
+    }
 }
-
-
 
 
 if (app.Environment.IsDevelopment())
@@ -71,6 +70,7 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseHttpsRedirection();
 }
+
 app.UseAuthorization();
 
 app.MapControllers();

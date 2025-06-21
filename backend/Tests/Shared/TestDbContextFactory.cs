@@ -12,4 +12,14 @@ public static class TestDbContextFactory
             .Options;
         return new ApplicationDbContext(options);
     }
+
+    public static ApplicationDbContext CreateMigrationData()
+    {
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+            .Options;
+        var ctx = new ApplicationDbContext(options);
+        ctx.Database.EnsureCreated();
+        return ctx;
+    }
 }

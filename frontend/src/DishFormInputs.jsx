@@ -9,16 +9,6 @@ const formInputs = [
     className: "input input-primary",
     key: "name",
   },
-<<<<<<< HEAD
-  {
-    label: "Zdjęcie (url)",
-    type: "text",
-    className: "input input-warning",
-    key: "url",
-  },
-=======
-
->>>>>>> magda
   {
     label: "Cena w zł",
     type: "number",
@@ -47,10 +37,7 @@ const DishFormInputs = ({ formIngredients }) => {
     if (!dish.price || isNaN(dish.price) || parseFloat(dish.price) <= 0) {
       newErrors.price = "Cena musi być liczbą większą od zera.";
     }
-<<<<<<< HEAD
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // Zwraca true, jeśli brak błędów
-=======
+
     if (formIngredients.length === 0) {
       alert("Dodaj przynajmniej jeden składnik do dania.");
       return false;
@@ -63,7 +50,6 @@ const DishFormInputs = ({ formIngredients }) => {
     }
 
     return true;
->>>>>>> magda
   };
 
   const handleSubmit = async () => {
@@ -79,46 +65,6 @@ const DishFormInputs = ({ formIngredients }) => {
         })),
       ],
     };
-<<<<<<< HEAD
-    postDish(dishToSent);
-  };
-
-  return (
-    <div className="inputs pt-8 w-1/2 pl-12">
-      {formInputs.map((input, index) => (
-        <div className="flex flex-col mb-6" key={index}>
-          <label className="text-lg font-medium mb-2">{input.label}</label>
-          {input.type === "url" ? (
-            <UrlInput
-              value={dish.url}
-              onChange={(e) => handleInputChange("url", e.target.value)}
-            />
-          ) : (
-            <input
-              type={input.type}
-              placeholder={input.label}
-              className={`${input.className} ${
-                errors[input.key] ? "border-red-500" : ""
-              }`}
-              value={dish[input.key]}
-              onChange={(e) => handleInputChange(input.key, e.target.value)}
-            />
-          )}
-          {errors[input.key] && (
-            <span className="text-red-500 text-sm mt-1">
-              {errors[input.key]}
-            </span>
-          )}
-        </div>
-      ))}
-      <button
-        className="btn btn-active btn-accent text-xl mt-6"
-        onClick={handleSubmit}
-      >
-        Stwórz danie
-      </button>
-    </div>
-=======
     try {
       await postDish(dishToSent);
       alert("✅ Danie zostało utworzone!");
@@ -163,7 +109,6 @@ const DishFormInputs = ({ formIngredients }) => {
           Stwórz danie
         </button>
       </div>
->>>>>>> magda
   );
 };
 

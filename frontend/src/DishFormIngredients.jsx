@@ -1,10 +1,17 @@
+import { use, useEffect } from "react";
+
 const DishFormIngredients = ({ formIngredients, actions }) => {
+
+  useEffect(() => {
+    console.log("Form ingredients updated:", formIngredients);
+  }
+  , [formIngredients]);
   return (
     <>
-      {formIngredients.map((ingredient) => (
+      {formIngredients.map((ingredient, idx) => (
         <div
           className="grid grid-cols-3 gap-4 bg-gray-900 p-4 m-4 rounded-lg"
-          key={ingredient.IngredientId}
+          key={ingredient.IngredientId ?? idx}
         >
           <div className="flex flex-col">
             <p>{ingredient.Name}</p>

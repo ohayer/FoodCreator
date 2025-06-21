@@ -1,36 +1,28 @@
 using Food_Creator.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace Food_Creator
+namespace Food_Creator;
+
+
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    : DbContext(options)
 {
-    public class ApplicationDbContext : DbContext
+    public DbSet<Dish>           Dishes          => Set<Dish>();
+    public DbSet<Ingredient>     Ingredients     => Set<Ingredient>();
+    public DbSet<DishIngredient> DishIngredients => Set<DishIngredient>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Konstruktor przyjmujący opcje kontekstu
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
-        }
+        base.OnModelCreating(modelBuilder);
 
-        // DbSet reprezentujące tabele w bazie danych
-        public DbSet<Dish> Dishes { get; set; }
-        public DbSet<Ingredient> Ingredients { get; set; }
-        public DbSet<DishIngredient> DishIngredients { get; set; }
+        // Klucz złożony dla tabeli łączącej
+        modelBuilder.Entity<DishIngredient>()
+            .HasKey(di => new { di.DishId, di.IngredientId });
 
-        // Metoda konfigurująca model
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // Definiowanie klucza złożonego dla tabeli DishIngredient (tabela łącząca)
-            modelBuilder.Entity<DishIngredient>()
-                .HasKey(di => new { di.DishId, di.IngredientId });
-
-            // Dodawanie danych początkowych przy tworzeniu bazy danych
-            var dbSeeds = new DbSeeds();
-            modelBuilder.Entity<Ingredient>().HasData(
-                dbSeeds.Ingredients);
-            modelBuilder.Entity<Dish>().HasData(
-                dbSeeds.Dishes);
-            modelBuilder.Entity<DishIngredient>().HasData(
-                dbSeeds.DishIngredients);
-            // Dodatkowe konfiguracje mogą iść tutaj
-        }
+        // Seed – dane z osobnej klasy
+        modelBuilder.Entity<Ingredient>().HasData(DbSeeds.Ingredients);
+        modelBuilder.Entity<Dish>()      .HasData(DbSeeds.Dishes);
+        modelBuilder.Entity<DishIngredient>()
+            .HasData(DbSeeds.DishIngredients);
     }
 }
