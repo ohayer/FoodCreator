@@ -10,7 +10,7 @@ const LoginForm = ({ onLoginSuccess }) => {
         try {
             const res = await signInWithEmailAndPassword(auth, email, password);
             alert("Zalogowano!");
-            onLoginSuccess(res.user);
+            onLoginSuccess(res.user); // przekazujemy użytkownika do App
         } catch (err) {
             alert("Błąd logowania: " + err.message);
         }
