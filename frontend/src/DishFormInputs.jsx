@@ -37,7 +37,6 @@ const DishFormInputs = ({ formIngredients }) => {
     if (!dish.price || isNaN(dish.price) || parseFloat(dish.price) <= 0) {
       newErrors.price = "Cena musi być liczbą większą od zera.";
     }
-
     if (formIngredients.length === 0) {
       alert("Dodaj przynajmniej jeden składnik do dania.");
       return false;
