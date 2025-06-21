@@ -1,0 +1,4 @@
+[
+  { "IngredientId": 1, "Name": "CheeseUpdated", "Price": 3.5 },
+  { "IngredientId": 1, "Name": "MilkUpdated", "Price": 2.3 }
+]
