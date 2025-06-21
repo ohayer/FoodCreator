@@ -1,12 +1,16 @@
-﻿using System.IO;
+using System.IO;
 using System.Threading.Tasks;
 using Food_Creator.controller;
 using Food_Creator.Model;
+using Food_Creator;
 using Food_Creator.Model.dto;
 using FoodCreator.Tests.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Xunit;
+using System;
+
 
 /// <summary>
 /// Waliduje poprawne dodanie składnika bez obrazka.
@@ -67,5 +71,23 @@ public class Ingredients_PostTests
         var ent     = Assert.IsType<Ingredient>(created.Value);
         Assert.NotNull(ent.Image);
         Assert.Equal(10, ent.Image!.Length);
+    }
+    
+    /// <summary>
+    /// Tworzenie składnika gdy jest błąd w bazie danych
+    /// </summary>
+    [Fact]
+    public async Task CreateIngredient_WhenDbFails_ReturnsBadRequest()
+    {
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+            .Options;
+        var ctx = new ThrowingDbContext(options);
+        var ctrl = new IngredientsController(ctx);
+        var dto = new IngredientDto { Name = "Apple", Price = 1.0f };
+
+        var result = await ctrl.CreateIngredient(dto);
+
+        Assert.IsType<BadRequestObjectResult>(result.Result);
     }
 }
