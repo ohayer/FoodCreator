@@ -17,4 +17,9 @@
   <ItemGroup>
     <ProjectReference Include="..\FoodCreator.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="TestData\ingredient_updates.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
